@@ -9,6 +9,7 @@ import (
 	"github.com/gingerxman/eel"
 	"github.com/gingerxman/eel/config"
 	_ "github.com/gingerxman/ginger-account/models/user"
+	_ "github.com/gingerxman/ginger-account/models/corp"
 )
 
 var Db *gorm.DB

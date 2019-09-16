@@ -1,0 +1,4 @@
+package corp
+
+func init() {
+}
