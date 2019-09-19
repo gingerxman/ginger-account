@@ -29,9 +29,13 @@ type User struct {
 	
 	//基本信息
 	Name string `gorm:"size:52"`
+	Avatar string `gorm:"size:1024"`
 	Password string `gorm:"size:52"`
 	Sex int
 	Thumbnail string `gorm:"size:1024"`
+	
+	//其他信息
+	Source string `gorm:"size:52"`
 }
 func (this *User) TableName() string {
 	return "user_user"

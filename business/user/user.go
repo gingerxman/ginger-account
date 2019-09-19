@@ -12,6 +12,10 @@ import (
 	m_user "github.com/gingerxman/ginger-account/models/user"
 )
 
+type UpdateUserParams struct {
+	Name string
+	Avatar string
+}
 
 type User struct {
 	eel.EntityBase
@@ -90,8 +94,33 @@ func (this *User) Delete() error {
 	return nil
 }
 
+func (this *User) Update(params *UpdateUserParams) error {
+	gormParams := gorm.Params{}
+	if params.Name != "" {
+		gormParams["name"] = params.Name
+	}
+	if params.Avatar != "" {
+		gormParams["avatar"] = params.Avatar
+	}
+	
+	db := eel.GetOrmFromContext(this.Ctx).Model(&m_user.User{}).Where("id", this.Id).Update(gormParams)
+	
+	if db.Error != nil {
+		eel.Logger.Error(db.Error)
+		return db.Error
+	}
+	
+	return nil
+}
+
 func (this *User) GetJWTToken() string {
 	return eel.EncodeJWT(this.GetJWTTokenData())
+}
+
+func (this *User) GetJWTTokenInCorp(corpId int) string {
+	data := this.GetJWTTokenData()
+	data["cid"] = corpId
+	return eel.EncodeJWT(data)
 }
 
 func (this *User) GetJWTTokenData() eel.Map {

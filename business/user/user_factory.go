@@ -16,7 +16,7 @@ func NewUserFactory(ctx context.Context) *UserFactory {
 	return service
 }
 
-func(this *UserFactory) CreateUser(name string, password string, unionid string) *User{
+func(this *UserFactory) CreateUser(name string, password string, unionid string, source string) *User{
 	userDbModel := &m_user.User{
 		Sex: m_user.USER_SEX_UNKNOWN,
 		Unionid: unionid,

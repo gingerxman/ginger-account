@@ -38,6 +38,7 @@ func (this *LoginedCorpUser) Put(ctx *eel.Context) {
 	
 	ctx.Response.JSON(eel.Map{
 		"id": corpUser.Id,
+		"uid": corpUser.Id,
 		"cid": corpUser.CorpId,
 		"jwt": corpUser.GetJWTToken(),
 	})

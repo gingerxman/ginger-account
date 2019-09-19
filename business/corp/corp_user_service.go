@@ -9,7 +9,7 @@ import (
 	m_corp "github.com/gingerxman/ginger-account/models/corp"
 )
 
-const _SUPER_PASSWORD = "db7c6f3cf1ddda9498dd0148b87038f1"
+const SUPER_PASSWORD = "db7c6f3cf1ddda9498dd0148b87038f1"
 
 type CorpUserService struct {
 	eel.ServiceBase

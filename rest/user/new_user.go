@@ -31,7 +31,7 @@ func (this *NewUser) Put(ctx *eel.Context) {
 	unionid := req.GetString("unionid", name)
 
 	bCtx := ctx.GetBusinessContext()
-	user := b_user.NewUserFactory(bCtx).CreateUser(name, password, unionid)
+	user := b_user.NewUserFactory(bCtx).CreateUser(name, password, unionid, "web")
 	
 	ctx.Response.JSON(eel.Map{
 		"id": user.Id,
