@@ -16,6 +16,14 @@ func NewEncodeCorpService(ctx context.Context) *EncodeCorpService {
 }
 
 func (this *EncodeCorpService) Encode(corp *Corp) *RCorp {
+	var rCorpUser *RCorpUser
+	if corp.CorpUser != nil {
+		rCorpUser = &RCorpUser{
+			Id: corp.CorpUser.Id,
+			Name: corp.CorpUser.Username,
+		}
+	}
+	
 	rCorp := &RCorp{
 		Id: corp.Id,
 		Code: corp.Code,
@@ -23,6 +31,7 @@ func (this *EncodeCorpService) Encode(corp *Corp) *RCorp {
 		Logo: corp.Logo,
 		Remark: corp.Remark,
 		IsPlatform: corp.IsPlatform,
+		CorpUser: rCorpUser,
 		CreatedAt: corp.CreatedAt.Format("2006-01-02 15:04:05"),
 	}
 	

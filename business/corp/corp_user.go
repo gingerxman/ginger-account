@@ -39,6 +39,7 @@ func (this *CorpUser) GetJWTToken() string {
 func NewCorpUserFromModel(ctx context.Context, model *m_corp.CorpUser) *CorpUser {
 	corpUser := new(CorpUser)
 	corpUser.Ctx = ctx
+	corpUser.Id = model.Id
 	corpUser.CorpId = model.CorpId
 	corpUser.Username = model.Username
 	corpUser.RealName = model.RealName

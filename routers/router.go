@@ -25,4 +25,5 @@ func init() {
 	eel.RegisterResource(&login.LoginedBDDUser{})
 	
 	eel.RegisterResource(&dev.BDDReset{})
+	eel.RegisterResource(&dev.AllCorps{})
 }

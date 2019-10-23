@@ -20,7 +20,6 @@ func (this *EncodeUserService) Encode(user *User) *RUser {
 		Id: user.Id,
 		Code: user.Code,
 		
-		//微信相关信息
 		Unionid: user.Unionid,
 		Name: user.Name,
 		Avatar: user.Avatar,

@@ -36,10 +36,14 @@ func (this *LoginedCorpUser) Put(ctx *eel.Context) {
 		return
 	}
 	
+	corp := corp.NewCorpRepository(bCtx).GetCorpById(corpUser.CorpId)
+	
 	ctx.Response.JSON(eel.Map{
 		"id": corpUser.Id,
 		"uid": corpUser.Id,
 		"cid": corpUser.CorpId,
+		"username": corpUser.Username,
+		"corp_name": corp.Name,
 		"jwt": corpUser.GetJWTToken(),
 	})
 }

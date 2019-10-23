@@ -24,6 +24,8 @@ type Corp struct {
 	IsActive bool
 	IsPlatform bool
 	CreatedAt time.Time
+	
+	CorpUser *CorpUser
 }
 
 func (this *Corp) GetId() int {
