@@ -12,5 +12,6 @@
 *.out
 vendor
 main
+ginger-account
 _pid
 .idea

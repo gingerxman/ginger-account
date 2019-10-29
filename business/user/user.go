@@ -68,7 +68,7 @@ func (this *User) FillWithModel(model *m_user.User) {
 	user.Code = model.Code
 	user.Unionid = model.Unionid
 	user.Name = model.Name
-	user.Avatar = model.Thumbnail
+	user.Avatar = model.Avatar
 	user.Sex = "unknown"
 	if model.Sex == m_user.USER_SEX_MALE {
 		user.Sex = "male"

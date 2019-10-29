@@ -22,8 +22,10 @@ func init() {
 	eel.RegisterResource(&login.LoginedUser{})
 	eel.RegisterResource(&login.LoginedCorpUser{})
 	eel.RegisterResource(&login.LoginedMallUser{})
+	eel.RegisterResource(&login.MallVisitor{})
 	eel.RegisterResource(&login.LoginedBDDUser{})
 	
 	eel.RegisterResource(&dev.BDDReset{})
 	eel.RegisterResource(&dev.AllCorps{})
+	eel.RegisterResource(&dev.Users{})
 }
