@@ -3,7 +3,8 @@ package corp
 import (
 	"fmt"
 	b_corp "github.com/gingerxman/ginger-account/business/corp"
-
+	"github.com/gingerxman/ginger-account/business/user"
+	
 	"github.com/gingerxman/eel"
 )
 
@@ -60,6 +61,9 @@ func (this *Corp) Put(ctx *eel.Context) {
 		ctx.Response.Error("corp:create_fail", err.Error())
 		return
 	}
+	
+	// 创建corp相关的user
+	user.NewUserFactory(bCtx).CreateUserForCorp(corp)
 	
 	ctx.Response.JSON(eel.Map{})
 }

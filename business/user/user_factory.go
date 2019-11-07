@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"github.com/gingerxman/eel"
+	"github.com/gingerxman/ginger-account/business"
 	m_user "github.com/gingerxman/ginger-account/models/user"
 )
 
@@ -22,6 +23,7 @@ func(this *UserFactory) CreateUser(name string, password string, unionid string,
 		Unionid: unionid,
 		Password: password,
 		Name: name,
+		Source: source,
 	}
 	o := eel.GetOrmFromContext(this.Ctx)
 	db := o.Create(userDbModel)
@@ -38,6 +40,11 @@ func(this *UserFactory) CreateUser(name string, password string, unionid string,
 	//}
 	user := NewUserFromModel(this.Ctx, userDbModel)
 	return user
+}
+
+func (this *UserFactory) CreateUserForCorp(corp business.ICorp) {
+	unionid := corp.GetUnionid()
+	this.CreateUser(unionid, "corp", unionid,"corp")
 }
 
 func init() {

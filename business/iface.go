@@ -10,4 +10,5 @@ type IUser interface {
 
 type ICorp interface {
 	GetId() int
+	GetUnionid() string
 }

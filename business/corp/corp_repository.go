@@ -88,5 +88,18 @@ func (this *CorpRepository) GetCorpById(id int) *Corp {
 	}
 }
 
+func (this *CorpRepository) GetCorpByName(name string) *Corp {
+	filters := eel.Map{
+		"name": name,
+	}
+	
+	corps := this.GetCorps(filters)
+	if len(corps) == 0 {
+		return nil
+	} else {
+		return corps[0]
+	}
+}
+
 func init() {
 }

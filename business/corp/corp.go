@@ -55,6 +55,10 @@ func (this *Corp) AddCorpUser(username string, password string) error {
 	return nil
 }
 
+func (this *Corp) GetUnionid() string {
+	return fmt.Sprintf("corp_%d", this.Id)
+}
+
 func (this *Corp) Fill() {
 	if this.Code != "" {
 		return

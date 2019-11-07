@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"github.com/gingerxman/ginger-account/business"
 	
 	"github.com/gingerxman/eel"
 	m_user "github.com/gingerxman/ginger-account/models/user"
@@ -99,6 +100,12 @@ func (this *UserRepository) GetUserByUnionid(unionid string) *User {
 	} else {
 		return users[0]
 	}
+}
+
+func (this *UserRepository) GetRelatedUserIdForCorp(corp business.ICorp) int {
+	unionid := corp.GetUnionid()
+	relatedUser := this.GetUserByUnionid(unionid)
+	return relatedUser.Id
 }
 
 func init() {

@@ -18,6 +18,7 @@ func init() {
 	eel.RegisterResource(&user.User{})
 	
 	eel.RegisterResource(&corp.Corp{})
+	eel.RegisterResource(&corp.RelatedUserId{})
 	
 	eel.RegisterResource(&login.LoginedUser{})
 	eel.RegisterResource(&login.LoginedCorpUser{})

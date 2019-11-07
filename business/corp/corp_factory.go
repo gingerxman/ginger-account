@@ -34,7 +34,6 @@ func(this *CorpFactory) createCorp(name string, isPlatform bool) (*Corp, error) 
 		eel.Logger.Error(db.Error)
 		panic(eel.NewBusinessError("corp_factory:create_corp_fail", "创建Corp失败"))
 	}
-	
 	corp := NewCorpFromModel(this.Ctx, model)
 	return corp, nil
 }
