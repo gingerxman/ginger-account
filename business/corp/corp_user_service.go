@@ -5,11 +5,12 @@ import (
 	"crypto/sha1"
 	"fmt"
 	"github.com/gingerxman/eel"
-	"io"
+	"github.com/gingerxman/eel/config"
 	m_corp "github.com/gingerxman/ginger-account/models/corp"
+	"io"
 )
 
-const SUPER_PASSWORD = "db7c6f3cf1ddda9498dd0148b87038f1"
+var SUPER_PASSWORD = ""
 
 type CorpUserService struct {
 	eel.ServiceBase
@@ -41,4 +42,5 @@ func (this *CorpUserService) Auth(username string, password string) (*CorpUser, 
 }
 
 func init() {
+	SUPER_PASSWORD = config.ServiceConfig.String("system::SUPER_PASSWORD")
 }
