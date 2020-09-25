@@ -8,6 +8,7 @@ import (
 	"github.com/gingerxman/ginger-account/rest/login"
 	"github.com/gingerxman/ginger-account/rest/user"
 	"github.com/gingerxman/ginger-account/rest/corp"
+	"github.com/gingerxman/ginger-account/rest/area"
 )
 
 func init() {
@@ -27,6 +28,13 @@ func init() {
 	eel.RegisterResource(&login.LoginedMallUser{})
 	eel.RegisterResource(&login.MallVisitor{})
 	eel.RegisterResource(&login.LoginedBDDUser{})
+	
+	/*
+	 area
+	*/
+	eel.RegisterResource(&area.Area{})
+	eel.RegisterResource(&area.AreaCode{})
+	eel.RegisterResource(&area.YouzanAreaList{})
 	
 	eel.RegisterResource(&dev.BDDReset{})
 	eel.RegisterResource(&dev.AllCorps{})
