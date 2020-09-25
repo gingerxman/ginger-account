@@ -2,8 +2,10 @@ package corp
 
 import (
 	"context"
+	"github.com/gingerxman/ginger-account/business"
 	
 	"github.com/gingerxman/eel"
+	"github.com/davecgh/go-spew/spew"
 	m_corp "github.com/gingerxman/ginger-account/models/corp"
 )
 
@@ -65,6 +67,35 @@ func (this *CorpUserRepository) GetCorpUsersByIds(ids []int) []*CorpUser {
 	}
 	
 	return this.GetCorpUsers(filters)
+}
+
+func (this *CorpUserRepository) GetCorpUserById(id int) *CorpUser {
+	filters := eel.Map{
+		"id": id,
+	}
+	
+	corpUsers := this.GetCorpUsers(filters)
+	spew.Dump(corpUsers)
+	
+	if len(corpUsers) > 0 {
+		return corpUsers[0]
+	} else {
+		return nil
+	}
+}
+
+func (this *CorpUserRepository) GetCorpUserInCorp(id int, corp business.ICorp) *CorpUser {
+	filters := eel.Map{
+		"corp_id": corp.GetId(),
+		"id": id,
+	}
+	
+	users := this.GetCorpUsers(filters)
+	if len(users) == 0 {
+		return nil
+	} else {
+		return users[0]
+	}
 }
 
 func init() {

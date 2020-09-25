@@ -42,7 +42,7 @@ func (this *BDDReset) Put(ctx *eel.Context) {
 		gingerCorp, err = corp.NewCorpFactory(bCtx).CreatePlatformCorp("Ginger Corp")
 		if err == nil {
 			user.NewUserFactory(bCtx).CreateUserForCorp(gingerCorp)
-			gingerCorp.AddCorpUser("ginger", "test")
+			gingerCorp.AddCorpUser("ginger", "test", "平台超级管理员", []string{}, true)
 		}
 		
 		o.Exec("delete from user_user")

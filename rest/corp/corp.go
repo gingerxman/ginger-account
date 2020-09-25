@@ -56,7 +56,7 @@ func (this *Corp) Put(ctx *eel.Context) {
 	
 	username := req.GetString("username")
 	password := req.GetString("password")
-	err = corp.AddCorpUser(username, password)
+	err = corp.AddCorpUser(username, password, "店铺管理员", []string{}, true)
 	if err != nil {
 		ctx.Response.Error("corp:create_fail", err.Error())
 		return

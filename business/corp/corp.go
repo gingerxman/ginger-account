@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/sha1"
 	"fmt"
+	"github.com/gingerxman/ginger-account/business/auth"
 	"github.com/gingerxman/gorm"
 	"io"
 	
@@ -13,6 +14,11 @@ import (
 	m_corp "github.com/gingerxman/ginger-account/models/corp"
 )
 
+func EncryptPassword(password string) string {
+	hash := sha1.New()
+	io.WriteString(hash, password)
+	return fmt.Sprintf("%x", hash.Sum(nil))
+}
 
 type Corp struct {
 	eel.EntityBase
@@ -32,24 +38,35 @@ func (this *Corp) GetId() int {
 	return this.Id
 }
 
-func (this *Corp) encryptPassword(password string) string {
-	hash := sha1.New()
-	io.WriteString(hash, password)
-	return fmt.Sprintf("%x", hash.Sum(nil))
-}
-
 //AddCorpUser 为corp创建登录账号
-func (this *Corp) AddCorpUser(username string, password string) error {
+func (this *Corp) AddCorpUser(username string, password string, realname string, groupNames []string, isManager bool) error {
 	model := &m_corp.CorpUser{
 		Username: username,
-		Password: this.encryptPassword(password),
+		RealName: realname,
+		Password: EncryptPassword(password),
 		CorpId: this.Id,
+		IsManager: isManager,
 	}
 	o := eel.GetOrmFromContext(this.Ctx)
 	db := o.Create(model)
 	if db.Error != nil {
 		eel.Logger.Error(db.Error)
 		panic(eel.NewBusinessError("corp_factory:create_corp_fail", "创建Corp失败"))
+	}
+	
+	if len(groupNames) > 0 {
+		groups := auth.NewGroupRepository(this.Ctx).GetGroupsByNames(groupNames)
+		for _, group := range groups {
+			model := &m_corp.UserHasGroup{
+				CorpUserId: model.Id,
+				GroupId: group.Id,
+			}
+			db := o.Create(model)
+			if db.Error != nil {
+				eel.Logger.Error(db.Error)
+				panic(eel.NewBusinessError("corp_factory:create_corp_fail", "添加用户角色失败"))
+			}
+		}
 	}
 	
 	return nil

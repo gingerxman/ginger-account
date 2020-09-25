@@ -23,6 +23,7 @@ type CorpUser struct {
 	Username string `gorm:"size:128"`
 	RealName string `gorm:"size:128"`
 	IsActive bool `gorm:"default:true"`
+	IsManager bool `gorm:"default:false"`
 	Password string `gorm:"size:256"`
 }
 func (self *CorpUser) TableName() string {
@@ -32,6 +33,7 @@ func (self *CorpUser) TableName() string {
 type Permission struct {
 	eel.Model
 	Code string `gorm:"size:80"`
+	Name string `gorm:"size:52"`
 }
 func (this *Permission) TableName() string {
 	return "auth_permission"
@@ -48,6 +50,7 @@ func (this *UserHasPermission) TableName() string {
 
 type Group struct {
 	eel.Model
+	Code string `gorm:"size:80;unique"`
 	Name string `gorm:"size:80;unique"`
 }
 func (this *Group) TableName() string {
