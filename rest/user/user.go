@@ -18,7 +18,7 @@ func (this *User) Resource() string {
 func (this *User) GetParameters() map[string][]string {
 	return map[string][]string{
 		"GET": []string{"id:int"},
-		"POST": []string{"id:int", "?name", "?avatar"},
+		"POST": []string{"id:int", "?name", "?avatar", "?sex"},
 		"DELETE": []string{"id:int"},
 	}
 }
@@ -46,6 +46,7 @@ func (this *User) Post(ctx *eel.Context) {
 	id, _ := req.GetInt("id")
 	name := req.GetString("name")
 	avatar := req.GetString("avatar")
+	sex := req.GetString("sex", "")
 	
 	bCtx := ctx.GetBusinessContext()
 	user := b_user.NewUserRepository(bCtx).GetUserById(id)
@@ -57,6 +58,7 @@ func (this *User) Post(ctx *eel.Context) {
 	err := user.Update(&b_user.UpdateUserParams{
 		Name: name,
 		Avatar: avatar,
+		Sex: sex,
 	})
 	if err != nil {
 		ctx.Response.Error("user:update_fail", err.Error())

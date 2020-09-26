@@ -15,6 +15,7 @@ import (
 type UpdateUserParams struct {
 	Name string
 	Avatar string
+	Sex string
 }
 
 type User struct {
@@ -26,6 +27,7 @@ type User struct {
 	Avatar string
 	Sex string
 	Code string
+	Source string
 	CreatedAt time.Time
 }
 
@@ -69,6 +71,7 @@ func (this *User) FillWithModel(model *m_user.User) {
 	user.Unionid = model.Unionid
 	user.Name = model.Name
 	user.Avatar = model.Avatar
+	user.Source = model.Source
 	user.Sex = "unknown"
 	if model.Sex == m_user.USER_SEX_MALE {
 		user.Sex = "male"
@@ -101,6 +104,9 @@ func (this *User) Update(params *UpdateUserParams) error {
 	}
 	if params.Avatar != "" {
 		gormParams["avatar"] = params.Avatar
+	}
+	if params.Avatar != "" {
+		gormParams["sex"] = m_user.STR2SEX[params.Sex]
 	}
 	
 	db := eel.GetOrmFromContext(this.Ctx).Model(&m_user.User{}).Where("id", this.Id).Update(gormParams)

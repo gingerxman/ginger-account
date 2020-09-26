@@ -7,4 +7,5 @@ type RUser struct {
 	Avatar string `json:"avatar"`
 	Sex    string `json:"sex"`
 	Code   string `json:"code"`
+	Source string `json:"source"`
 }

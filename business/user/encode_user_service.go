@@ -24,6 +24,7 @@ func (this *EncodeUserService) Encode(user *User) *RUser {
 		Name: user.Name,
 		Avatar: user.Avatar,
 		Sex: user.Sex,
+		Source: user.Source,
 	}
 	
 	return rUser
