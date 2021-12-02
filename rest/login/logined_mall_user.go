@@ -20,7 +20,7 @@ func (this *LoginedMallUser) SkipAuthCheck() bool {
 
 func (this *LoginedMallUser) GetParameters() map[string][]string {
 	return map[string][]string{
-		"PUT": []string{"name", "unionid", "avatar", "corp_id:int"},
+		"PUT": []string{"name", "unionid", "?avatar", "corp_id:int"},
 	}
 }
 
